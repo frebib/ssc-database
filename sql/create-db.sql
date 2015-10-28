@@ -52,7 +52,7 @@ CREATE TABLE StudentRegistration (
 
 CREATE TABLE StudentContact (
     sid         INTEGER     NOT NULL,
-    email       VARCHAR(32),
+    email       VARCHAR(32) UNIQUE,
     address     VARCHAR(128),
 
     FOREIGN KEY(sid) REFERENCES Student(sid)
@@ -76,7 +76,7 @@ CREATE TABLE NextOfKinContact (
 CREATE TABLE LecturerContact (
     lid         INTEGER     NOT NULL,
     office      VARCHAR(8)  NOT NULL,
-    email       VARCHAR(32) NOT NULL,
+    email       VARCHAR(32) NOT NULL UNIQUE,
 
     FOREIGN KEY(lid) REFERENCES Lecturer(lid)
         ON DELETE CASCADE
