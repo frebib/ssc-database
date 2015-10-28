@@ -1,0 +1,9 @@
+DROP TABLE Student;
+DROP TABLE Lecturer;
+DROP TABLE StudentRegistration;
+DROP TABLE StudentContact;
+DROP TABLE NextOfKinContact;
+DROP TABLE LecturerContact;
+DROP TABLE Tutor;
+DROP TABLE Titles;
+DROP TABLE RegistrationType;
