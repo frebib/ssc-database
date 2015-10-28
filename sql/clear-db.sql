@@ -1,5 +1,5 @@
-DROP TABLE Student;
-DROP TABLE Lecturer;
+DROP TABLE Student CASCADE;
+DROP TABLE Lecturer CASCADE;
 DROP TABLE StudentRegistration;
 DROP TABLE StudentContact;
 DROP TABLE NextOfKinContact;
