@@ -1,12 +1,12 @@
 CREATE TABLE Titles (
-    titleid     SERIAL,
+    titleid     SERIAL      NOT NULL,
     title       VARCHAR(4)  NOT NULL,
 
     PRIMARY KEY(titleid)
 );
 
 INSERT INTO Titles (title)
-VALUES ("Miss", "Mrs", "Ms", "Mr", "Dr");
+VALUES ('Mrs'),('Miss'),('Ms'),('Mr'),('Dr');
 
 CREATE TABLE RegistrationType (
     regtypeid   SERIAL      NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE RegistrationType (
 );
 
 INSERT INTO RegistrationType (descr)
-VALUES ("Normal", "Resit", "Repeat");
+VALUES ('Normal'),('Resit'),('Repeat');
 
 CREATE TABLE Student (
     sid         INTEGER     NOT NULL,
