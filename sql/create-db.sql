@@ -31,7 +31,7 @@ CREATE TABLE Student (
 );
 
 CREATE TABLE Lecturer (
-    lid         SERIAL      NOT NULL,
+    lid         INTEGER     NOT NULL,
     titleid     INTEGER     NOT NULL,
     forename    VARCHAR(32) NOT NULL,
     familyname  VARCHAR(48) NOT NULL,
