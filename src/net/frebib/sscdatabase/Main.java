@@ -1,5 +1,6 @@
 package net.frebib.sscdatabase;
 
+import net.frebib.sscdatabase.gui.DBView;
 import net.frebib.sscdatabase.gui.dialog.AddStudentDialog;
 
 import javax.swing.*;
@@ -21,7 +22,8 @@ public class Main {
         try {
             cfg = DBConfig.load(propFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "There was an error loading the config file...\n" +
+                    e.toString(), "SQL Exception", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
     }
@@ -37,6 +39,8 @@ public class Main {
 
             UIManager.setLookAndFeel(UIManager.getInstalledLookAndFeels()[3].getClassName());
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Could not connect to the database...\n" +
+                            e.toString(), "SQL Exception", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             System.exit(1);
         }
