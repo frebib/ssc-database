@@ -108,7 +108,7 @@ public class InitDB {
             forename = surname;
             surname = temp;
         }
-        if(r.nextInt(4) == 0)
+        if(idnum != 0 && r.nextInt(4) == 0)
             surname = idnum + "";
 
         return forename + emailseps[r.nextInt(emailseps.length)] + surname +
