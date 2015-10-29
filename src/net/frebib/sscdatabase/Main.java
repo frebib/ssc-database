@@ -1,12 +1,11 @@
 package net.frebib.sscdatabase;
 
+import net.frebib.sscdatabase.gui.dialog.Student;
+
 import javax.swing.*;
 import java.io.IOException;
-import java.sql.BatchUpdateException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
-import java.util.Random;
 
 public class Main {
     private final static String PROPFILE = "database.properties";
@@ -35,12 +34,14 @@ public class Main {
             conn = DriverManager.getConnection(dbname, cfg.getProp("username"), cfg.getProp("password"));
 
             InitDB.createDB(conn, cfg);
+
+            UIManager.setLookAndFeel(UIManager.getInstalledLookAndFeels()[3].getClassName());
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
 
-        JFrame frame = new JFrame();
+        JFrame frame = new Student(conn);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
