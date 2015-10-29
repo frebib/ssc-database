@@ -1,6 +1,6 @@
 package net.frebib.sscdatabase;
 
-import net.frebib.sscdatabase.gui.dialog.Student;
+import net.frebib.sscdatabase.gui.dialog.AddStudentDialog;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class Main {
             System.exit(1);
         }
 
-        JFrame frame = new Student(conn);
+        JFrame frame = new AddStudentDialog(conn);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }

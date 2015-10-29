@@ -1,41 +1,39 @@
 package net.frebib.sscdatabase.gui.dialog;
 
 import com.toedter.calendar.JDateChooser;
-import net.frebib.sscdatabase.data.ComboBoxObject;
+import net.frebib.sscdatabase.data.ComboBoxPair;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.plaf.nimbus.State;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Student extends JFrame implements ActionListener {
+public abstract class StudentDialog extends JFrame {
     private JPanel studpanel, contactpanel, btnpanel;
-    private JTextField sid, forename, surname;
-    private JCheckBox chksid;
-    private JComboBox<Object> titles, regtypeid;
-    private JComboBox<Integer> yearofstudy;
-    private JDateChooser dobchooser;
+    protected JTextField sid, forename, surname;
+    protected JCheckBox chksid;
+    protected JComboBox<Object> titles, regtypeid;
+    protected JComboBox<Integer> yearofstudy;
+    protected JDateChooser dobchooser;
 
-    private JTextField email;
-    private JTextArea address;
+    protected JTextField email;
+    protected JTextArea address;
 
     private JButton accept, cancel, addtutor;
 
-    public Student(Connection conn) {
+    public StudentDialog(Connection conn) {
         super("Add a Student");
         init(conn);
     }
+
     private void init(Connection conn) {
         studpanel = new JPanel(new GridBagLayout());
-        Border title = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Student Details");
+        Border title = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "StudentForm Details");
         Border gap = BorderFactory.createEmptyBorder(6,6,6,6);
         Border brgap = BorderFactory.createEmptyBorder(0,0,6,0);
         Border lbrgap = BorderFactory.createEmptyBorder(0,6,6,0);
@@ -57,7 +55,7 @@ public class Student extends JFrame implements ActionListener {
 
         chksid = new JCheckBox();
         chksid.setSelected(true);
-        chksid.addActionListener(this);
+        chksid.addActionListener(e -> { sid.setEnabled(!((JCheckBox)e.getSource()).isSelected()); });
         c = createGBC(2, 0);
         c.anchor = GridBagConstraints.EAST;
         c.weightx = 0;
@@ -68,13 +66,13 @@ public class Student extends JFrame implements ActionListener {
         lbltitle.setLabelFor(titles);
         studpanel.add(lbltitle, createGBC(0, 1));
 
-        ArrayList<ComboBoxObject> elements = new ArrayList<ComboBoxObject>();
-        elements.add(new ComboBoxObject("Choose a title", -1));
+        ArrayList<ComboBoxPair> elements = new ArrayList<ComboBoxPair>();
+        elements.add(new ComboBoxPair("Choose a title", -1));
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT titleid, title FROM Title");
             ResultSet rs = ps.executeQuery();
             while (rs.next())
-                elements.add(new ComboBoxObject(rs.getString(2), rs.getInt(1)));
+                elements.add(new ComboBoxPair(rs.getString(2), rs.getInt(1)));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,12 +124,12 @@ public class Student extends JFrame implements ActionListener {
         lblreg.setLabelFor(regtypeid);
         studpanel.add(lblreg, createGBC(0, 6));
 
-        elements = new ArrayList<ComboBoxObject>();
+        elements = new ArrayList<ComboBoxPair>();
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT regtypeid, descr FROM RegistrationType");
             ResultSet rs = ps.executeQuery();
             while (rs.next())
-                elements.add(new ComboBoxObject(rs.getString(2), rs.getInt(1)));
+                elements.add(new ComboBoxPair(rs.getString(2), rs.getInt(1)));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -167,16 +165,22 @@ public class Student extends JFrame implements ActionListener {
         address.setPreferredSize(new Dimension(180, address.getSize().height));
         contactpanel.add(address, createGBC(1, 1));
 
+        addtutor = new JButton("Edit Tutor");
+        addtutor.addActionListener((ActionEvent e) -> addTutorClicked(e));
+        c = createGBC(0, 2);
+        c.gridwidth = 2;
+        contactpanel.add(addtutor, c);
 
         //////////////////////////
 
         GridLayout gl = new GridLayout(1, 2);
         gl.setHgap(12);
         btnpanel = new JPanel(gl);
-        //btnpanel.setBorder(gap);
 
         accept = new JButton("Ok");
+        accept.addActionListener((ActionEvent e) -> acceptClicked(e));
         cancel = new JButton("Cancel");
+        cancel.addActionListener((ActionEvent e) -> cancelClicked(e));
         btnpanel.add(accept);
         btnpanel.add(cancel);
 
@@ -228,12 +232,7 @@ public class Student extends JFrame implements ActionListener {
         return c;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() instanceof JCheckBox) {
-            JCheckBox chk = (JCheckBox)actionEvent.getSource();
-            if (chk.equals(chksid))
-                sid.setEnabled(!chk.isSelected());
-        }
-    }
+    protected abstract void acceptClicked(ActionEvent e);
+    protected abstract void cancelClicked(ActionEvent e);
+    protected abstract void addTutorClicked(ActionEvent e);
 }
