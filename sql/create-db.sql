@@ -16,7 +16,7 @@ CREATE TABLE RegistrationType (
 );
 
 INSERT INTO RegistrationType (descr)
-VALUES ('Normal'),('Resit'),('Repeat');
+VALUES ('Normal'),('Repeat'),('External');
 
 CREATE TABLE Student (
     sid         INTEGER     NOT NULL,
