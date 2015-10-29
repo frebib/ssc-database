@@ -11,7 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 
 public abstract class StudentDialog extends JFrame {
     private JPanel studpanel, contactpanel, btnpanel;
@@ -26,8 +28,11 @@ public abstract class StudentDialog extends JFrame {
 
     private JButton accept, cancel, addtutor;
 
+    protected Connection conn;
+
     public StudentDialog(Connection conn) {
         super("Add a Student");
+        this.conn = conn;
         init(conn);
     }
 
@@ -230,6 +235,28 @@ public abstract class StudentDialog extends JFrame {
         c.weightx = (x == 0) ? 0.1 : 1.0;
         c.weighty = 1.0;
         return c;
+    }
+
+    public String[] validateFields() {
+        ArrayList<String> errors = new ArrayList<>(4);
+        if (sid.getText().isEmpty())
+            errors.add("The student ID must not be empty. Please fill it in or allow" +
+                    " the system to auto-generate an id");
+        if (((ComboBoxPair)titles.getSelectedItem()).id < 1)
+            errors.add("Please choose a title");
+
+        if (forename.getText().isEmpty())
+            errors.add("Please enter a first name/forename");
+        if (surname.getText().isEmpty())
+            errors.add("Please enter a family name/surname");
+        if (dobchooser.getDate().equals(Date.from(Instant.EPOCH)))
+            errors.add("Pleas enter your date of birth. You could not have been born today!");
+        if (email.getText().isEmpty())
+            errors.add("Please enter a valid email address");
+        if (address.getText().isEmpty())
+            errors.add("Please enter your home address");
+
+        return errors.toArray(new String[errors.size()]);
     }
 
     protected abstract void acceptClicked(ActionEvent e);
