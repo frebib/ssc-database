@@ -75,7 +75,7 @@ CREATE TABLE NextOfKinContact (
 
 CREATE TABLE LecturerContact (
     lid         INTEGER     NOT NULL,
-    office      VARCHAR(8)  NOT NULL,
+    office      VARCHAR(3)  NOT NULL,
     email       VARCHAR(64) NOT NULL UNIQUE,
 
     FOREIGN KEY(lid) REFERENCES Lecturer(lid)
