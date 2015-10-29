@@ -123,7 +123,7 @@ public class InitDB {
     }
     private static int titleIDGenerator(Random r, boolean isMale, boolean isLecturer) {
         if (r.nextInt(4) == 0 || isLecturer && r.nextBoolean())
-            return 5;               // Dr is titleid=5
+            return 5 + r.nextInt(2);               // Dr/Prof are titleid=5/6
 
         if (isMale) return 4;        // If male & !Dr then must be Mr
         return r.nextInt(3) + 1;    // If female then should be Miss,Ms or Mrs

@@ -6,7 +6,7 @@ CREATE TABLE Title (
 );
 
 INSERT INTO Title (title)
-VALUES ('Mrs'),('Miss'),('Ms'),('Mr'),('Dr');
+VALUES ('Mrs'),('Miss'),('Ms'),('Mr'),('Dr'),('Prof');
 
 CREATE TABLE RegistrationType (
     regtypeid   SERIAL      NOT NULL,
