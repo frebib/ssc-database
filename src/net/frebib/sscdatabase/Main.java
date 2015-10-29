@@ -42,10 +42,13 @@ public class Main {
             InitDB.createDB(conn, cfg);
         } catch (Exception e) {
             e.printStackTrace();
+            ((BatchUpdateException)e).getNextException().printStackTrace();
             System.exit(1);
         }
 
-        new JFrame().setVisible(true);
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {
