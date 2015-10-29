@@ -43,7 +43,7 @@ CREATE TABLE Lecturer (
 
 CREATE TABLE StudentRegistration (
     sid         INTEGER     NOT NULL,
-    yearOfStudy SMALLINT    NOT NULL CHECK(yearOfStudy >= 1),
+    yearofstudy SMALLINT    NOT NULL CHECK(yearofstudy >= 1),
     regtypeid   INTEGER     NOT NULL,
 
     FOREIGN KEY(sid) REFERENCES Student(sid)
