@@ -1,11 +1,11 @@
-CREATE TABLE Titles (
+CREATE TABLE Title (
     titleid     SERIAL      NOT NULL,
     title       VARCHAR(4)  NOT NULL,
 
     PRIMARY KEY(titleid)
 );
 
-INSERT INTO Titles (title)
+INSERT INTO Title (title)
 VALUES ('Mrs'),('Miss'),('Ms'),('Mr'),('Dr');
 
 CREATE TABLE RegistrationType (
@@ -26,7 +26,7 @@ CREATE TABLE Student (
     dob         DATE        NOT NULL CHECK(dob < current_date),
 
     PRIMARY KEY(sid),
-    FOREIGN KEY(titleid) REFERENCES Titles(titleid)
+    FOREIGN KEY(titleid) REFERENCES Title(titleid)
         ON DELETE RESTRICT
 );
 
@@ -37,7 +37,7 @@ CREATE TABLE Lecturer (
     familyname  VARCHAR(48) NOT NULL,
 
     PRIMARY KEY(lid),
-    FOREIGN KEY(titleid) REFERENCES Titles(titleid)
+    FOREIGN KEY(titleid) REFERENCES Title(titleid)
         ON DELETE RESTRICT
 );
 

@@ -36,7 +36,7 @@ public class InitDB {
         int nextid = initmin + r.nextInt(initmax - initmin);
         long oneyear = 31556952000L;
 
-        ResultSet rs = conn.createStatement().executeQuery("SELECT count(*) FROM Titles");
+        ResultSet rs = conn.createStatement().executeQuery("SELECT count(*) FROM Title");
         rs.next();
         int titlecount = rs.getInt(1);
 
