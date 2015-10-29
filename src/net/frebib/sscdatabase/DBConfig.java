@@ -21,4 +21,7 @@ public class DBConfig {
             throw new IllegalArgumentException("A property for '" + key + "' was not found");
         return val;
     }
+    public int getInt(String key) {
+        return Integer.parseInt(this.getProp(key));
+    }
 }
