@@ -52,7 +52,7 @@ CREATE TABLE StudentRegistration (
 
 CREATE TABLE StudentContact (
     sid         INTEGER     NOT NULL,
-    email       VARCHAR(32) UNIQUE,
+    email       VARCHAR(64) UNIQUE,
     address     VARCHAR(128),
 
     FOREIGN KEY(sid) REFERENCES Student(sid)
@@ -64,7 +64,7 @@ CREATE TABLE StudentContact (
 CREATE TABLE NextOfKinContact (
     sid         INTEGER     NOT NULL,
     name        VARCHAR(64) NOT NULL,
-    email       VARCHAR(32),
+    email       VARCHAR(64),
     address     VARCHAR(128),
 
     FOREIGN KEY(sid) REFERENCES Student(sid)
