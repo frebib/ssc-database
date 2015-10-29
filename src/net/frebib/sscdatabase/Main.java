@@ -29,20 +29,14 @@ public class Main {
 
     public void run() {
         // TODO: Create a connection GUI and pretty it up
-        dbname = "jdbc:postgresql://" + cfg.getProp("host") + '/' + cfg.getProp("dbname");
         try {
+            dbname = "jdbc:postgresql://" + cfg.getProp("host") + '/' + cfg.getProp("dbname");
             System.setProperty("jdbc.drivers", "org.postgresql.Driver");
             conn = DriverManager.getConnection(dbname, cfg.getProp("username"), cfg.getProp("password"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
 
-        try {
             InitDB.createDB(conn, cfg);
         } catch (Exception e) {
             e.printStackTrace();
-            ((BatchUpdateException)e).getNextException().printStackTrace();
             System.exit(1);
         }
 
