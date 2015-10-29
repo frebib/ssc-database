@@ -58,7 +58,9 @@ CREATE TABLE StudentContact (
     FOREIGN KEY(sid) REFERENCES Student(sid)
         ON DELETE CASCADE,
     CONSTRAINT contact_not_null
-        CHECK(email IS NOT NULL OR address IS NOT NULL)
+        CHECK(email IS NOT NULL OR address IS NOT NULL),
+    CONSTRAINT valid_email
+        CHECK(email LIKE '%_@_%_.__%')
 );
 
 CREATE TABLE NextOfKinContact (
@@ -79,7 +81,9 @@ CREATE TABLE LecturerContact (
     email       VARCHAR(64) NOT NULL UNIQUE,
 
     FOREIGN KEY(lid) REFERENCES Lecturer(lid)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT valid_email
+        CHECK(email LIKE '%_@_%_.__%')
 );
 
 CREATE TABLE Tutor (
