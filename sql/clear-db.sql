@@ -5,5 +5,5 @@ DROP TABLE StudentContact;
 DROP TABLE NextOfKinContact;
 DROP TABLE LecturerContact;
 DROP TABLE Tutor;
-DROP TABLE Titles;
+DROP TABLE Title;
 DROP TABLE RegistrationType;
