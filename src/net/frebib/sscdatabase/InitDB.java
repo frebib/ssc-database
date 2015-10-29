@@ -103,11 +103,13 @@ public class InitDB {
             else
                 forename = forename.substring(0, 1);
         }
-        if (r.nextInt(2) == 1) {
+        if (r.nextInt(2) == 0) {
             String temp = forename;
             forename = surname;
             surname = temp;
         }
+        if(r.nextInt(4) == 0)
+            surname = idnum + "";
 
         return forename + emailseps[r.nextInt(emailseps.length)] + surname +
                 '@' + domains[r.nextInt(domains.length)];
