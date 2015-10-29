@@ -1,4 +1,4 @@
-package net.frebib.sscdatabase;
+package net.frebib.sscdatabase.util;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -1,5 +1,7 @@
 package net.frebib.sscdatabase;
 
+import net.frebib.sscdatabase.util.IOHelper;
+
 import java.io.IOException;
 import java.util.Properties;
 
