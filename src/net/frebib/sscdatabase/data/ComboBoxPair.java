@@ -1,10 +1,10 @@
 package net.frebib.sscdatabase.data;
 
-public class ComboBoxObject {
+public class ComboBoxPair {
     public String str;
     public int id;
 
-    public ComboBoxObject(String str, int id) {
+    public ComboBoxPair(String str, int id) {
         this.str = str;
         this.id = id;
     }
