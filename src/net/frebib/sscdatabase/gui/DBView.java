@@ -4,21 +4,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
 
-public class DBView extends JFrame {
+public class DBView {
     private Connection conn;
-    private JPanel panel;
     protected DBTable table;
 
+    private JFrame frame;
+
     public DBView(Connection conn, String title) {
-        super(title);
+        this.frame = new JFrame(title);
         this.conn = conn;
-
-        //this.setLayout(new GridLayout(1,1));
         this.table = new DBTable(conn);
-        panel = new JPanel();
-        panel.add(table);
-        this.add(panel);
 
-        this.pack();
+        frame.setLayout(new BorderLayout());
+        frame.add(table, BorderLayout.CENTER);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
     }
+
+    public void setVisible(boolean b) {frame.setVisible(b);}
 }
