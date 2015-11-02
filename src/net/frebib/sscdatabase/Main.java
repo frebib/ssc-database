@@ -1,7 +1,6 @@
 package net.frebib.sscdatabase;
 
 import net.frebib.sscdatabase.gui.DBView;
-import net.frebib.sscdatabase.gui.dialog.AddStudentDialog;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -45,9 +44,8 @@ public class Main {
             System.exit(1);
         }
 
-        JFrame frame = new AddStudentDialog(conn);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        DBView view = new DBView(conn, "Joe");
+        view.setVisible(true);
     }
 
     public static void main(String[] args) {
