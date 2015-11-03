@@ -14,20 +14,19 @@ public class DBTable extends JPanel {
 
     public DBTable(Connection conn) {
         super();
-        this.conn = conn;
+        table = new JTable();
 
-        this.table = new JTable();
-        setLayout(new BorderLayout());
-		add(new JScrollPane(table), BorderLayout.CENTER);
+        this.setLayout(new BorderLayout());
+        this.add(new JScrollPane(table), BorderLayout.CENTER);
 
         try {
-            fetchData();
+            table.setModel(fetchData(conn));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void fetchData() throws SQLException {
+    public static TableModel fetchData(Connection conn) throws SQLException {
         String stmt =
                 "SELECT Student.sid, title, Student.forename, Student.familyname, dob, StudentContact.email, " +
                         "address, Lecturer.titleid, Lecturer.forename, Lecturer.familyname " +
@@ -47,20 +46,19 @@ public class DBTable extends JPanel {
         List<String[]> tableData = new ArrayList<String[]>();
         while (rs.next()) {
             String[] row = new String[rsm.getColumnCount()];
-			row[0] = Integer.toString(rs.getInt(1));
-			row[1] = rs.getString(2);
+            row[0] = Integer.toString(rs.getInt(1));
+            row[1] = rs.getString(2);
             row[2] = rs.getString(3);
             row[3] = rs.getString(4);
             row[4] = rs.getDate(5).toString();
             row[5] = rs.getString(6);
-			row[6] = rs.getString(7);
+            row[6] = rs.getString(7);
             row[7] = rs.getInt(8) + "";
             row[8] = rs.getString(9);
             row[9] = rs.getString(10);
             tableData.add(row);
-		}
+        }
 
-        TableModel tm = new DefaultTableModel(tableData.toArray(new String[tableData.size()][]), colnames);
-        this.table.setModel(tm);
+        return new DefaultTableModel(tableData.toArray(new String[tableData.size()][]), colnames);
     }
 }

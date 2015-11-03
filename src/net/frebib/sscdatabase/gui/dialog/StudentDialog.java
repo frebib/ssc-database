@@ -51,12 +51,22 @@ public abstract class StudentDialog extends JFrame {
         lblid.setLabelFor(sid);
         studpanel.add(lblid, createGBC(0, 0));
 
-        sid = new JTextField();
-        sid.setEnabled(false);
-        sid.setPreferredSize(new Dimension(120, sid.getMinimumSize().height));
-        c = createGBC(1, 0);
-        c.gridwidth = 1;
-        studpanel.add(sid, c);
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT sid FROM STUDENT ORDER BY sid DESC LIMIT 1");
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+
+            sid = new JTextField();
+            sid.setText((rs.getInt(1) + 1) + "");
+            sid.setEnabled(false);
+            sid.setPreferredSize(new Dimension(120, sid.getMinimumSize().height));
+            c = createGBC(1, 0);
+            c.gridwidth = 1;
+            studpanel.add(sid, c);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         chksid = new JCheckBox();
         chksid.setSelected(true);

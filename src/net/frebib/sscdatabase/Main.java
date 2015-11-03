@@ -28,7 +28,6 @@ public class Main {
     }
 
     public void run() {
-        // TODO: Create a connection GUI and pretty it up
         try {
             dbname = "jdbc:postgresql://" + cfg.getProp("host") + '/' + cfg.getProp("dbname");
             System.setProperty("jdbc.drivers", "org.postgresql.Driver");
